@@ -22,7 +22,7 @@ notesRouter.get('/:id', checkId, async (req, res) => {
   res.locals.title = `Заметка №${req.params.id}`;
 
   try {
-    res.locals.data = await db.Note.findByPk(req.param.id);
+    res.locals.data = await db.Note.findByPk(req.params.id);
   } catch (error) {
     res.locals.error = error.message;
     res.status(500);
