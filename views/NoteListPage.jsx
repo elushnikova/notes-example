@@ -1,25 +1,18 @@
 const React = require('react');
 const Layout = require('./Layout');
-const NoteListItem = require('./NoteListItem');
+const NoteList = require('./NoteList');
 
 function NoteListPage({ title, appTitle, error, data }) {
   return (
     <Layout title={title} appTitle={appTitle}>
-      <h2>{title}</h2>
       {error && (
         <>
-          <h3>Ошибка</h3>
+          <h2>Ошибка</h2>
           <p>{error}</p>
         </>
       )}
 
-      {data && data.length > 0 && (
-        <ul>
-          {data.map((note) => (
-            <NoteListItem key={note.id} note={note} />
-          ))}
-        </ul>
-      )}
+      {data && data.length > 0 && <NoteList title={title} notes={data} />}
     </Layout>
   );
 }
