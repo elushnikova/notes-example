@@ -5,9 +5,15 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["airbnb-base"],
+  "extends": ["plugin:react/recommended", "airbnb"],
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "ecmaVersion": "latest"
   },
-  "rules": {}
+  "plugins": ["react"],
+  "rules": {
+    "react/prop-types": "off"
+  }
 }
