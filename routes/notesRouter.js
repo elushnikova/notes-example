@@ -3,11 +3,7 @@ const db = require('../db/models');
 
 // GET /notes
 notesRouter.get('/', async (req, res) => {
-  res.locals = {
-    title: 'Заметки',
-    error: null,
-    data: null,
-  };
+  res.locals.title = 'Заметки';
 
   try {
     res.locals.data = await db.Note.list();
@@ -21,11 +17,7 @@ notesRouter.get('/', async (req, res) => {
 
 // GET /notes/:id
 notesRouter.get('/:id', async (req, res) => {
-  res.locals = {
-    title: `Заметка №${req.params.id}`,
-    error: null,
-    data: null,
-  };
+  res.locals.title = `Заметка №${req.params.id}`;
 
   const id = Number(req.params.id);
   if (Number.isNaN(id)) {

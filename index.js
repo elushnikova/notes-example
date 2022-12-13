@@ -1,20 +1,23 @@
 const express = require('express');
 const db = require('./db/models');
+const formatLocals = require('./middleware/formatLocals');
 const notesRouter = require('./routes/notesRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(formatLocals);
+
 app.use('/notes', notesRouter);
 
 app.get('/', (req, res) => {
-  res.locals = {
-    title: 'Анонимный блог',
-    notes: {
+  res.locals.title = 'Анонимный блог';
+  res.locals.data = [
+    {
       title: 'Заметки',
       path: '/notes',
     },
-  };
+  ];
 
   res.json(res.locals);
 });
