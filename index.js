@@ -1,11 +1,22 @@
 const express = require('express');
 const db = require('./db/models');
+const notesRouter = require('./routes/notesRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use('/notes', notesRouter);
+
 app.get('/', (req, res) => {
-  res.json({ title: 'Анонимный блог', message: 'Ведутся работы' });
+  const result = {
+    title: 'Анонимный блог',
+    notes: {
+      title: 'Заметки',
+      path: '/notes',
+    },
+  };
+
+  res.json(result);
 });
 
 /* eslint-disable no-console */
