@@ -7,6 +7,7 @@ app.get('/', (req, res) => {
   res.json({ title: 'Анонимный блог', message: 'Ведутся работы' });
 });
 
+/* eslint-disable no-console */
 app
   .listen(PORT)
   .on('error', (error) => {
@@ -16,3 +17,4 @@ app
   .on('listening', () => {
     console.log('Веб-сервер слушает порт', PORT);
   });
+/* eslint-enable no-console */
