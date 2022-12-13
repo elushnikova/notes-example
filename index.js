@@ -13,6 +13,7 @@ app.locals.appTitle = 'Анонимный блог';
 
 app.use(ssr);
 app.use(formatLocals);
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/notes', notesRouter);
 

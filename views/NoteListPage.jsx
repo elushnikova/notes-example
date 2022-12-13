@@ -1,5 +1,6 @@
 const React = require('react');
 const Layout = require('./Layout');
+const NoteAddForm = require('./NoteAddForm');
 const NoteList = require('./NoteList');
 
 function NoteListPage({ title, appTitle, error, data }) {
@@ -12,6 +13,7 @@ function NoteListPage({ title, appTitle, error, data }) {
         </>
       )}
 
+      <NoteAddForm />
       {data && data.length > 0 && <NoteList title={title} notes={data} />}
     </Layout>
   );

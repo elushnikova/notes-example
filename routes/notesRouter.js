@@ -49,10 +49,27 @@ notesRouter.get('/:id', checkId, async (req, res) => {
 });
 
 // POST /notes
-notesRouter.post('/', (req, res) => {
+notesRouter.post('/', async (req, res) => {
   res.locals.title = 'Создать заметку';
-  res.locals.error = 'Пока не реализовано';
-  res.status(501).json(res.locals);
+
+  if (!req.body || !req.body.body) {
+    res.locals.error = 'У заметки должен быть текст';
+    res.status(400);
+    res.renderComponent(NoteListPage);
+    return;
+  }
+
+  try {
+    res.locals.data = await db.Note.create({
+      title: req.body.title,
+      body: req.body.body,
+    });
+    res.redirect('/notes');
+  } catch (error) {
+    res.locals.error = error.message;
+    res.status(500);
+    res.renderComponent(NoteListPage);
+  }
 });
 
 // PUT /notes/:id
