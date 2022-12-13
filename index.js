@@ -1,3 +1,4 @@
+require('@babel/register');
 const express = require('express');
 const db = require('./db/models');
 const formatLocals = require('./middleware/formatLocals');
