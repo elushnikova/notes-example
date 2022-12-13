@@ -2,11 +2,13 @@ require('@babel/register');
 const express = require('express');
 const db = require('./db/models');
 const formatLocals = require('./middleware/formatLocals');
+const ssr = require('./middleware/ssr');
 const notesRouter = require('./routes/notesRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(ssr);
 app.use(formatLocals);
 
 app.use('/notes', notesRouter);
