@@ -10,7 +10,7 @@ notesRouter.get('/', async (req, res) => {
   };
 
   try {
-    result.data = await db.Note.findAll();
+    result.data = await db.Note.list();
   } catch (error) {
     result.error = error.message;
     res.status(500);
