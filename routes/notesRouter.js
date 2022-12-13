@@ -1,6 +1,7 @@
 const notesRouter = require('express').Router();
 const db = require('../db/models');
 const checkId = require('../middleware/checkId');
+const NoteListPage = require('../views/NoteListPage');
 
 // GET /notes
 notesRouter.get('/', async (req, res) => {
@@ -13,7 +14,7 @@ notesRouter.get('/', async (req, res) => {
     res.status(500);
   }
 
-  res.json(res.locals);
+  res.renderComponent(NoteListPage);
 });
 
 // GET /notes/:id
