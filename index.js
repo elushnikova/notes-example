@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use('/notes', notesRouter);
 
 app.get('/', (req, res) => {
-  const result = {
+  res.locals = {
     title: 'Анонимный блог',
     notes: {
       title: 'Заметки',
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     },
   };
 
-  res.json(result);
+  res.json(res.locals);
 });
 
 /* eslint-disable no-console */

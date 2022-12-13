@@ -3,25 +3,25 @@ const db = require('../db/models');
 
 // GET /notes
 notesRouter.get('/', async (req, res) => {
-  const result = {
+  res.locals = {
     title: 'Заметки',
     error: null,
     data: null,
   };
 
   try {
-    result.data = await db.Note.list();
+    res.locals.data = await db.Note.list();
   } catch (error) {
-    result.error = error.message;
+    res.locals.error = error.message;
     res.status(500);
   }
 
-  res.json(result);
+  res.json(res.locals);
 });
 
 // GET /notes/:id
 notesRouter.get('/:id', async (req, res) => {
-  const result = {
+  res.locals = {
     title: `Заметка №${req.params.id}`,
     error: null,
     data: null,
@@ -29,19 +29,19 @@ notesRouter.get('/:id', async (req, res) => {
 
   const id = Number(req.params.id);
   if (Number.isNaN(id)) {
-    result.error = 'ID должен быть числовой';
-    res.status(406).json(result);
+    res.locals.error = 'ID должен быть числовой';
+    res.status(406).json(res.locals);
     return;
   }
 
   try {
-    result.data = await db.Note.findByPk(id);
+    res.locals.data = await db.Note.findByPk(id);
   } catch (error) {
-    result.error = error.message;
+    res.locals.error = error.message;
     res.status(500);
   }
 
-  res.json(result);
+  res.json(res.locals);
 });
 
 module.exports = notesRouter;
