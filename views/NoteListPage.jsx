@@ -1,5 +1,6 @@
 const React = require('react');
 const Layout = require('./Layout');
+const NoteListItem = require('./NoteListItem');
 
 function NoteListPage({ title, appTitle, error, data }) {
   return (
@@ -15,11 +16,7 @@ function NoteListPage({ title, appTitle, error, data }) {
       {data && data.length > 0 && (
         <ul>
           {data.map((note) => (
-            <li key={note.id}>
-              <span>{note.title}</span>
-              <br />
-              <small>{note.createdAt.toLocaleString('ru-RU')}</small>
-            </li>
+            <NoteListItem key={note.id} note={note} />
           ))}
         </ul>
       )}
