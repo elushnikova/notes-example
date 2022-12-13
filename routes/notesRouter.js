@@ -1,5 +1,6 @@
 const notesRouter = require('express').Router();
 const db = require('../db/models');
+const checkId = require('../middleware/checkId');
 
 // GET /notes
 notesRouter.get('/', async (req, res) => {
@@ -16,18 +17,11 @@ notesRouter.get('/', async (req, res) => {
 });
 
 // GET /notes/:id
-notesRouter.get('/:id', async (req, res) => {
+notesRouter.get('/:id', checkId, async (req, res) => {
   res.locals.title = `Заметка №${req.params.id}`;
 
-  const id = Number(req.params.id);
-  if (Number.isNaN(id)) {
-    res.locals.error = 'ID должен быть числовой';
-    res.status(406).json(res.locals);
-    return;
-  }
-
   try {
-    res.locals.data = await db.Note.findByPk(id);
+    res.locals.data = await db.Note.findByPk(req.param.id);
   } catch (error) {
     res.locals.error = error.message;
     res.status(500);
