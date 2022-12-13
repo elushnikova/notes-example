@@ -1,4 +1,5 @@
 const { Model } = require('sequelize');
+const setupDateGetter = require('../helpers/setupDateGetter');
 
 module.exports = (sequelize, DataTypes) => {
   class Note extends Model {
@@ -28,10 +29,12 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
+      get: setupDateGetter('createdAt'),
     },
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
+      get: setupDateGetter('updatedAt'),
     },
   };
 

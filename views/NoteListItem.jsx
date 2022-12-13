@@ -5,7 +5,7 @@ function NoteListItem({ note }) {
     <li>
       <span>{note.title}</span>
       <br />
-      <small>{note.createdAt.toLocaleString('ru-RU')}</small>
+      <small>{note.createdAt}</small>
     </li>
   );
 }
