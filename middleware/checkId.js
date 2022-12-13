@@ -4,8 +4,7 @@ function checkId(req, res, next) {
   if (Number.isNaN(id)) {
     res.locals.title = 'Ошибка запроса';
     res.locals.error = 'ID должен быть числом';
-    res.status(406).json(res.locals);
-    return;
+    res.status(406);
   }
 
   next();
