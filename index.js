@@ -4,9 +4,12 @@ const db = require('./db/models');
 const formatLocals = require('./middleware/formatLocals');
 const ssr = require('./middleware/ssr');
 const notesRouter = require('./routes/notesRouter');
+const Home = require('./views/HomePage');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.locals.appTitle = 'Анонимный блог';
 
 app.use(ssr);
 app.use(formatLocals);
@@ -14,15 +17,8 @@ app.use(formatLocals);
 app.use('/notes', notesRouter);
 
 app.get('/', (req, res) => {
-  res.locals.title = 'Анонимный блог';
-  res.locals.data = [
-    {
-      title: 'Заметки',
-      path: '/notes',
-    },
-  ];
-
-  res.json(res.locals);
+  res.locals.title = 'Главная';
+  res.renderComponent(Home);
 });
 
 /* eslint-disable no-console */
