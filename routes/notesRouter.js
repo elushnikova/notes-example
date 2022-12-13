@@ -30,4 +30,25 @@ notesRouter.get('/:id', checkId, async (req, res) => {
   res.json(res.locals);
 });
 
+// POST /notes
+notesRouter.post('/', (req, res) => {
+  res.locals.title = 'Создать заметку';
+  res.locals.error = 'Пока не реализовано';
+  res.status(501).json(res.locals);
+});
+
+// PUT /notes/:id
+notesRouter.put('/:id', checkId, (req, res) => {
+  res.locals.title = `Редактировать заметку №${req.params.id}`;
+  res.locals.error = 'Пока не реализовано';
+  res.status(501).json(res.locals);
+});
+
+// DELETE /notes/:id
+notesRouter.delete('/:id', checkId, (req, res) => {
+  res.locals.title = `Удалить заметку №${req.params.id}`;
+  res.locals.error = 'Пока не реализовано';
+  res.status(501).json(res.locals);
+});
+
 module.exports = notesRouter;
