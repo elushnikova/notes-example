@@ -1,4 +1,5 @@
 const React = require('react');
+const Navigation = require('./Navigation');
 
 function Layout({ title, appTitle, children }) {
   return (
@@ -12,6 +13,7 @@ function Layout({ title, appTitle, children }) {
       <body>
         <header>
           <h1>{appTitle}</h1>
+          <Navigation />
         </header>
         <main>{children}</main>
       </body>
