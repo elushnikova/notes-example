@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate() {}
 
     static list() {
+      // SELECT id, title, createdAt FROM "Notes";
       return this.findAll({
         attributes: ['id', 'title', 'createdAt'],
       });

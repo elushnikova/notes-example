@@ -4,7 +4,7 @@ function NoteAddForm() {
   return (
     <section>
       <h2>Написать заметку</h2>
-      <form method="POST" action="/notes">
+      <form method="POST" action="/notes" className="js-add-note">
         <label htmlFor="titleInput">Заголовок</label>
         <br />
         <input

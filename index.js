@@ -1,4 +1,5 @@
 require('@babel/register');
+const path = require('path');
 const express = require('express');
 const db = require('./db/models');
 const formatLocals = require('./middleware/formatLocals');
@@ -8,17 +9,24 @@ const notesRouter = require('./routes/notesRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+// абсолютный путь до папки со статическими файлами
+const staticDir = path.join(__dirname, 'public');
 
 app.locals.appTitle = 'Анонимный блог';
 
 app.use(ssr);
 app.use(formatLocals);
+// прочесть тело запросов в формате urlencoded -> req.body
 app.use(express.urlencoded({ extended: true }));
+// прочесть тело запросов в формате JSON -> req.body
+app.use(express.json());
+// раздать статические файлы — изображения, стили, клиентские скрипты, etc.
+app.use(express.static(staticDir));
 
 app.use('/notes', notesRouter);
 app.use('/', indexRouter);
 
-app.get('*', (req, res) => res.redirect('/'));
+// app.get('*', (req, res) => res.redirect('/'));
 
 /* eslint-disable no-console */
 app
