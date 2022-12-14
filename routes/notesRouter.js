@@ -44,6 +44,7 @@ notesRouter.get('/:id', checkId, async (req, res) => {
     return;
   }
 
+  res.locals.title = note.title;
   res.locals.data = note;
   res.renderComponent(NotePage);
 });
