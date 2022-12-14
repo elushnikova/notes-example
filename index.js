@@ -18,6 +18,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/notes', notesRouter);
 app.use('/', indexRouter);
 
+app.get('*', (req, res) => res.redirect('/'));
+
 /* eslint-disable no-console */
 app
   .listen(PORT)
