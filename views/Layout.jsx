@@ -9,6 +9,11 @@ function Layout({ title, appTitle, children }) {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{`${title} · ${appTitle}`}</title>
+        {/*
+          Слеш в начале src очень важен!
+          Атрибут defer нужен, если работаем с DOM-деревом. Почему и как сделать иначе?
+        */}
+        <script src="/scripts/client.js" defer />
       </head>
       <body>
         <header>
