@@ -1,6 +1,7 @@
 const React = require('react');
 const Navigation = require('./Navigation');
 
+// функциональный компонент с параметром props = {}
 function Layout({ title, appTitle, children }) {
   return (
     <html lang="ru">

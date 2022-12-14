@@ -1,6 +1,7 @@
 const notesRouter = require('express').Router();
 const db = require('../db/models');
 const checkId = require('../middleware/checkId');
+const NoteListItem = require('../views/NoteListItem');
 const NoteListPage = require('../views/NoteListPage');
 const NotePage = require('../views/NotePage');
 
@@ -65,7 +66,14 @@ notesRouter.post('/', async (req, res) => {
       title: req.body.title,
       body: req.body.body,
     });
-    res.redirect('/notes');
+    // res.redirect('/notes'); // <- вариант 0: полная перезагрузка страницы! не устраивает
+    // res.json(res.locals); // вариант 1: отправить JSON
+    // ИЛИ вариант 2: отправить HTML
+    res.renderComponent(
+      NoteListItem,
+      { note: res.locals.data },
+      { doctype: false },
+    );
   } catch (error) {
     res.locals.error = error.message;
     res.status(500);

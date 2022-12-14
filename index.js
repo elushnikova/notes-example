@@ -16,14 +16,17 @@ app.locals.appTitle = 'Анонимный блог';
 
 app.use(ssr);
 app.use(formatLocals);
+// прочесть тело запросов в формате urlencoded -> req.body
 app.use(express.urlencoded({ extended: true }));
+// прочесть тело запросов в формате JSON -> req.body
+app.use(express.json());
 // раздать статические файлы — изображения, стили, клиентские скрипты, etc.
 app.use(express.static(staticDir));
 
 app.use('/notes', notesRouter);
 app.use('/', indexRouter);
 
-app.get('*', (req, res) => res.redirect('/'));
+// app.get('*', (req, res) => res.redirect('/'));
 
 /* eslint-disable no-console */
 app

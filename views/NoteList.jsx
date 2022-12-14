@@ -5,7 +5,7 @@ function NoteList({ title, notes }) {
   return (
     <section>
       <h2>{title}</h2>
-      <ul>
+      <ul className="js-notes">
         {notes.map((note) => (
           <NoteListItem key={note.id} note={note} />
         ))}
