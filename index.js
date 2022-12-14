@@ -3,8 +3,8 @@ const express = require('express');
 const db = require('./db/models');
 const formatLocals = require('./middleware/formatLocals');
 const ssr = require('./middleware/ssr');
+const indexRouter = require('./routes/indexRouter');
 const notesRouter = require('./routes/notesRouter');
-const Home = require('./views/HomePage');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,11 +16,7 @@ app.use(formatLocals);
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/notes', notesRouter);
-
-app.get('/', (req, res) => {
-  res.locals.title = 'Главная';
-  res.renderComponent(Home);
-});
+app.use('/', indexRouter);
 
 /* eslint-disable no-console */
 app
