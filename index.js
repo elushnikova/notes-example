@@ -1,4 +1,5 @@
 require('@babel/register');
+const path = require('path');
 const express = require('express');
 const db = require('./db/models');
 const formatLocals = require('./middleware/formatLocals');
@@ -8,12 +9,14 @@ const notesRouter = require('./routes/notesRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const staticDir = path.join(__dirname, 'public');
 
 app.locals.appTitle = 'Анонимный блог';
 
 app.use(ssr);
 app.use(formatLocals);
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(staticDir));
 
 app.use('/notes', notesRouter);
 app.use('/', indexRouter);
