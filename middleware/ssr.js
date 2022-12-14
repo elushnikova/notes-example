@@ -20,6 +20,7 @@ function renderComponent(
   this.end(html);
 }
 
+// Middleware-функция
 function ssr(req, res, next) {
   res.renderComponent = renderComponent;
   next();

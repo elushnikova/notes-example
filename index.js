@@ -9,6 +9,7 @@ const notesRouter = require('./routes/notesRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+// абсолютный путь до папки со статическими файлами
 const staticDir = path.join(__dirname, 'public');
 
 app.locals.appTitle = 'Анонимный блог';
@@ -16,6 +17,7 @@ app.locals.appTitle = 'Анонимный блог';
 app.use(ssr);
 app.use(formatLocals);
 app.use(express.urlencoded({ extended: true }));
+// раздать статические файлы — изображения, стили, клиентские скрипты, etc.
 app.use(express.static(staticDir));
 
 app.use('/notes', notesRouter);
