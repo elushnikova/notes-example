@@ -54,3 +54,28 @@ if (newNoteForm) {
     // обновить страницу без перезагрузки
   });
 }
+
+// Удаление заметок
+// Делегирование событий
+const notesContainer = document.querySelector('.js-notes');
+
+if (notesContainer) {
+  notesContainer.addEventListener('click', async (event) => {
+    const isDeleteBtn = event.target.classList.contains('js-delete');
+
+    if (!isDeleteBtn) return;
+
+    event.preventDefault();
+    const noteItem = event.target.closest('.js-note');
+    const noteId = noteItem.dataset.id;
+
+    // TODO try/catch
+    const response = await fetch(`/notes/${noteId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.status === 204) {
+      noteItem.remove();
+    }
+  });
+}

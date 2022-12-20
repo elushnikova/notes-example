@@ -90,10 +90,29 @@ notesRouter.put('/:id', checkId, (req, res) => {
 });
 
 // DELETE /notes/:id
-notesRouter.delete('/:id', checkId, (req, res) => {
+notesRouter.delete('/:id', checkId, async (req, res) => {
   res.locals.title = `Удалить заметку №${req.params.id}`;
-  res.locals.error = 'Пока не реализовано';
-  res.status(501).json(res.locals);
+
+  try {
+    const note = await db.Note.findByPk(req.params.id);
+    const isAuthor = note.userId === req.session.userId;
+
+    // Защита от IDOR-уязвимости
+    if (!isAuthor) {
+      res.status(403).json({ error: 'Нельзя удалить не свою заметку' });
+      return;
+    }
+
+    await db.Note.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = notesRouter;
