@@ -11,13 +11,15 @@ function renderComponent(
     ...this.locals, // передать res.locals
     ...props, // передать пропсы
   });
-  const html = ReactDOMServer.renderToStaticMarkup(reactElement);
 
-  if (options.doctype) {
-    this.write('<!DOCTYPE html>');
+  const html = ReactDOMServer.renderToStaticMarkup(reactElement);
+  if (!options.doctype) {
+    this.send(html);
+    return;
   }
 
-  this.end(html);
+  const document = `<!DOCTYPE html>${html}`;
+  this.send(document);
 }
 
 // Middleware-функция
