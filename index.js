@@ -7,6 +7,7 @@ const formatLocals = require('./middleware/formatLocals');
 const ssr = require('./middleware/ssr');
 const indexRouter = require('./routes/indexRouter');
 const notesRouter = require('./routes/notesRouter');
+const authRouter = require('./routes/authRouter');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +25,7 @@ app.use(express.json());
 // раздать статические файлы — изображения, стили, клиентские скрипты, etc.
 app.use(express.static(staticDir));
 
+app.use('/auth', authRouter);
 app.use('/notes', notesRouter);
 app.use('/', indexRouter);
 

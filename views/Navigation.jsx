@@ -6,6 +6,8 @@ function Navigation() {
       <a href="/">Главная</a>
       {' · '}
       <a href="/notes">Заметки</a>
+      {' · '}
+      <a href="/auth/login">Войти</a>
     </nav>
   );
 }
