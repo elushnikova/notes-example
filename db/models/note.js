@@ -3,7 +3,12 @@ const setupDateGetter = require('../helpers/setupDateGetter');
 
 module.exports = (sequelize, DataTypes) => {
   class Note extends Model {
-    static associate() {}
+    static associate({ User }) {
+      Note.Author = Note.belongsTo(User, {
+        foreignKey: 'userId',
+        as: 'author',
+      });
+    }
 
     static list() {
       // SELECT id, title, createdAt FROM "Notes";
@@ -26,6 +31,13 @@ module.exports = (sequelize, DataTypes) => {
     body: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
     },
     createdAt: {
       type: DataTypes.DATE,
