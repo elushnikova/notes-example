@@ -1,7 +1,7 @@
 {
-  "name": "anonymous-blog",
+  "name": "notes",
   "version": "1.0.0",
-  "description": "Анонимный блог",
+  "description": "Заметки",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
