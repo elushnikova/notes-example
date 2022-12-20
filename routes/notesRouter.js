@@ -65,6 +65,7 @@ notesRouter.post('/', async (req, res) => {
     res.locals.data = await db.Note.create({
       title: req.body.title,
       body: req.body.body,
+      userId: req.session.userId || undefined,
     });
     // res.redirect('/notes'); // <- вариант 0: полная перезагрузка страницы! не устраивает
     // res.json(res.locals); // вариант 1: отправить JSON

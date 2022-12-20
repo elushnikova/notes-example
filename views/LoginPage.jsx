@@ -8,10 +8,10 @@ function LoginPage({ title, appTitle }) {
 
       <form method="POST" action="/auth/login">
         <label htmlFor="loginInput">Логин</label>
-        <input name="login" id="loginInput" type="text" />
+        <input name="login" id="loginInput" type="text" required />
 
         <label htmlFor="passwordInput">Пароль</label>
-        <input name="password" id="passwordInput" type="password" />
+        <input name="password" id="passwordInput" type="password" required />
 
         <button type="submit">Войти</button>
       </form>

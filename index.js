@@ -2,12 +2,27 @@ require('dotenv').config();
 require('@babel/register');
 const path = require('path');
 const express = require('express');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+
 const db = require('./db/models');
 const formatLocals = require('./middleware/formatLocals');
 const ssr = require('./middleware/ssr');
 const indexRouter = require('./routes/indexRouter');
 const notesRouter = require('./routes/notesRouter');
 const authRouter = require('./routes/authRouter');
+
+const sessionConfig = {
+  store: new FileStore(),
+  name: 'user_sid', // Имя куки для хранения id сессии. По умолчанию - connect.sid
+  secret: process.env.SESSION_SECRET ?? 'test', // Секретное слово для шифрования, может быть любым
+  resave: false, // Пересохранять ли куку при каждом запросе
+  saveUninitialized: false, // Создавать ли сессию без инициализации ключей в req.session
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 12, // Срок истечения годности куки в миллисекундах
+    httpOnly: true, // Серверная установка и удаление куки, по умолчанию true
+  },
+};
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -24,6 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // раздать статические файлы — изображения, стили, клиентские скрипты, etc.
 app.use(express.static(staticDir));
+app.use(session(sessionConfig));
 
 app.use('/auth', authRouter);
 app.use('/notes', notesRouter);

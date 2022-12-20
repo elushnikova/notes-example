@@ -4,5 +4,8 @@
 # Dependencies
 node_modules
 
+# Generated files
+sessions
+
 # Misc
 .DS_Store
