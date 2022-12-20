@@ -21,6 +21,6 @@
   + Защита от IDOR-уязвимости
     Insecure Direct Object References
 
-  - Выход пользователя (log out)
+  x Выход пользователя (log out)
 
   x Регистрация пользователей
