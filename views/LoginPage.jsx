@@ -6,14 +6,40 @@ function LoginPage({ title, appTitle }) {
     <Layout title={title} appTitle={appTitle}>
       <h2>{title}</h2>
 
-      <form method="POST" action="/auth/login">
-        <label htmlFor="loginInput">Логин</label>
-        <input name="login" id="loginInput" type="text" required />
+      <form
+        method="POST"
+        action="/auth/login"
+        className="col col-md-6 col-lg-4"
+      >
+        <div className="mb-3">
+          <label htmlFor="loginInput" className="form-label">
+            Логин
+          </label>
+          <input
+            name="login"
+            id="loginInput"
+            type="text"
+            required
+            className="form-control"
+          />
+        </div>
 
-        <label htmlFor="passwordInput">Пароль</label>
-        <input name="password" id="passwordInput" type="password" required />
+        <div className="mb-3">
+          <label htmlFor="passwordInput" className="form-label">
+            Пароль
+          </label>
+          <input
+            name="password"
+            id="passwordInput"
+            type="password"
+            required
+            className="form-control"
+          />
+        </div>
 
-        <button type="submit">Войти</button>
+        <button type="submit" className="btn btn-primary">
+          Войти
+        </button>
       </form>
     </Layout>
   );
