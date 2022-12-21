@@ -23,11 +23,11 @@ function Layout({ title, appTitle, children }) {
         />
       </head>
       <body>
-        <header>
+        <header className="container mt-3 mb-4">
           <h1>{appTitle}</h1>
           <Navigation />
         </header>
-        <main>{children}</main>
+        <main className="container">{children}</main>
       </body>
     </html>
   );
