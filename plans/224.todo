@@ -1,0 +1,6 @@
+224 Деплой:
+  + env
+  - deploy
+    + БД: Supabase
+    + db config
+    Express-приложение: Render.com
